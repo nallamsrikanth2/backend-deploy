@@ -19,6 +19,30 @@ pipeline {
                     }
             }
         }
+        stage('build') {
+            steps {
+                sh """
+                    cd terraform
+                    terraform init -reconfigure 
+                """
+            }
+        }
+         stage('plan') {
+            steps {
+                sh """
+                    cd terraform
+                    terraform plan -var="app-version=${params.appversion}"
+                """
+            }
+        }
+        //  stage('deploy') {
+        //     steps {
+        //         sh """
+        //             cd terraform
+        //             terraform apply -auto-approve -var="app-version=${params.appversion}"
+        //         """
+        //     }
+        // }
     
     }
     post { 
