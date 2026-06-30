@@ -19,22 +19,20 @@ pipeline {
                     }
             }
         }
-        stage('build') {
+       stage('Terraform Init and plan') {
             steps {
-                sh """
-                    cd terraform
-                    terraform init -reconfigure 
-                """
-            }
-        }
-         stage('plan') {
-            steps {
-                sh """
-                    cd terraform
+                sh '''
+                for dir in terraform/01-vpc terraform/02-sg terraform/04-db terraform/05-vpn terraform/06-app_alb
+                do
+                    echo "Running: $dir"
+                    cd $dir
+                    terraform init -reconfigure
                     terraform plan -var="app-version=${params.appversion}"
-                """
-            }
-        }
+                    cd ../..
+                done
+                '''
+    }
+}
         //  stage('deploy') {
         //     steps {
         //         sh """
