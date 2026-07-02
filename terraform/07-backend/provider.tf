@@ -6,10 +6,10 @@ terraform {
     }
   }
     backend "s3" {
-    bucket = "srikanthnn"
-    key    = "expense-dev-db-rds"
-    region = "us-east-1"
-    use_lockfile = true
+        bucket = "srikanthnn"
+        key    = "expenseproject-dev-backend"
+        region = "us-east-1"
+        use_lockfile = true
   }
 }
 

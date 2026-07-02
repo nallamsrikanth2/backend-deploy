@@ -1,23 +1,27 @@
 variable "project_name" {
- type = string
- default = "expense" 
+    type = string
+    default = "expense"
+  
 }
 
 variable "environment" {
     type = string
     default = "dev"
+  
 }
 
 variable "common_tags" {
     type = map
     default = {
-        Project = "expense"
+        project_name = "expense"
         Environment = "dev"
+        Component = "backend"
         Terraform = "true"
     }
 }
 
-variable "zone_name" {
+variable "domain_name" {
     type = string
     default = "nsrikanth.online"
+  
 }

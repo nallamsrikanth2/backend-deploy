@@ -19,17 +19,11 @@ pipeline {
                     }
             }
         }
-       stage('Terraform Init and plan') {
+       stage('Terraform Init') {
             steps {
                 sh '''
-                for dir in terraform/01-vpc terraform/02-sg terraform/04-db terraform/05-vpn terraform/06-app_alb
-                do
-                    echo "Running: $dir"
-                    cd $dir
+                    cd terraform 
                     terraform init -reconfigure
-                    terraform plan -var="app-version=${params.appversion}"
-                    cd ../..
-                done
                 '''
     }
 }
